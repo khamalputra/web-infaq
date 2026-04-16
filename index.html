@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web App Infaq</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #loader {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f4f4f4;
+            z-index: 10;
+        }
+        iframe {
+            border: none;
+            width: 100%;
+            height: 100vh;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="loader">Loading aplikasi...</div>
+
+<iframe id="appFrame"
+    src="https://script.google.com/macros/s/AKfycbxYUSTMsLPBveCpF1MX_xFZC5kkwxUQnVtJCuYsbEFA4FXV4ejgVG6pUE7Z9jvHukrLJA/exec">
+</iframe>
+
+<script>
+    const iframe = document.getElementById('appFrame');
+    iframe.onload = function() {
+        document.getElementById('loader').style.display = 'none';
+        iframe.style.display = 'block';
+    };
+</script>
+
+</body>
+</html>
