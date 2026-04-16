@@ -3,45 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web App Infaq</title>
+    <title>Sistem Infaq SD Negeri 060924</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Aplikasi pengelolaan dana infaq masjid dan sekolah SD Negeri 060924. Transparansi dan akuntabilitas dalam genggaman.">
     <style>
-        body {
+        body, html {
             margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        #loader {
-            position: fixed;
+            padding: 0;
+            height: 100%;
             width: 100%;
-            height: 100vh;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+        
+        /* Container for Iframe */
+        .app-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* Initial Loading State */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: #f4f4f4;
             z-index: 10;
+            transition: opacity 0.5s ease;
         }
-        iframe {
-            border: none;
-            width: 100%;
-            height: 100vh;
-            display: none;
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #c0392b; /* School's Primary Red */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            color: #2c3e50;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
 
-<div id="loader">Loading aplikasi...</div>
+    <div id="loading" class="loading-screen">
+        <div class="spinner"></div>
+        <p class="loading-text">Menyiapkan Aplikasi Infaq...</p>
+    </div>
 
-<iframe id="appFrame"
-    src="https://script.google.com/macros/s/AKfycbzMFBfayjK2bb-k0iXTXHe-2t6Gq5DSeSKOcgKp_LfyFvP31Ra7YVYvA_BbBM1nsEBBTQ/exec">
-</iframe>
+    <div class="app-container">
+        <!-- MASUKKAN URL WEB APP ANDA DI BAWAH INI -->
+        <iframe 
+            src="https://script.google.com/macros/s/AKfycbzMFBfayjK2bb-k0iXTXHe-2t6Gq5DSeSKOcgKp_LfyFvP31Ra7YVYvA_BbBM1nsEBBTQ/exec" 
+            id="appFrame"
+            onload="hideLoading()">
+        </iframe>
+    </div>
 
-<script>
-    const iframe = document.getElementById('appFrame');
-    iframe.onload = function() {
-        document.getElementById('loader').style.display = 'none';
-        iframe.style.display = 'block';
-    };
-</script>
+    <script>
+        function hideLoading() {
+            const loading = document.getElementById('loading');
+            loading.classList.add('hidden');
+        }
 
+        // Timeout fall-back if onload doesn't trigger for some reason
+        setTimeout(hideLoading, 3000);
+    </script>
 </body>
 </html>
